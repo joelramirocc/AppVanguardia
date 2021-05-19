@@ -6,20 +6,17 @@
         
         <div class="table-responsive">
             <table class="table table-hover">
-                
-                <thead>
-                    <th>Cuenta</th>
-                    <th>Descripcion</th>
-                    <th>Cantidad</th>
-                    <th>Fecha</th>
-                </thead>
                 <tbody>
-                    <tr *ngFor="let transaction of transactions">                        
-                        <td>{{transaction.account}}</td>
-                        <td>{{transaction.description}}</td>
-                        <td [ngStyle]= "{'color':(transaction.amount > 0 ? 'green': 'red')}">{{ transaction.amount }}</td>
-                        <td>{{transaction.transactionDate}}</td>
-                    </tr>
+                    <tr *ngFor="let transaction of transactions">
+                                <td>
+                                    <p><b>{{transaction.description}}</b></p>
+                                    <p>{{transaction.account}}</p>
+                                </td>
+                                <td>
+                                    <p [ngStyle]= "{'color':(transaction.amount > 0 ? 'green': 'red')}"><b>{{ transaction.amount }}</b></p>
+                                    <p>{{transaction.transactionDate | date: 'dd/MM/yyyy'}}</p>
+                                </td>
+                        </tr>
                 </tbody>
             </table>
         </div>
