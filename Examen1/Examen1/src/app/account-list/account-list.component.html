@@ -8,7 +8,7 @@
                 <tbody>
                     <tr *ngFor="let account of accounts">
                         <td>{{account.name}}</td>
-                        <td>{{account.amount}}</td>
+                        <td>{{account.amount |  currency:account.currencySimbol:'symbol'}}</td>
                     </tr>
                 </tbody>
             </table>
