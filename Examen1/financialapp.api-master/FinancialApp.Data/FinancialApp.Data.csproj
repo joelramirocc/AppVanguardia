@@ -17,8 +17,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\FinancialApp.Core\FinancialApp.Core.csproj" />
-  </ItemGroup>
-
 </Project>
