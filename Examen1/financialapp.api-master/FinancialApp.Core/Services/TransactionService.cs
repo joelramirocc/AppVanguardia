@@ -58,9 +58,11 @@ namespace FinancialApp.Services.Services
         {
             try
             {
+                var test = await this.transactionRepository.All().ToListAsync();
                 var date = DateTime.Now;
                 var transactions = await this.transactionRepository
-                    .Filter(t => t.TransactionDate.Year == date.Year && t.TransactionDate.Month == date.Month)
+                    .All().Include(d => d.Account)
+                    .Where(t => t.TransactionDate.Year == date.Year && t.TransactionDate.Month == date.Month)
                     .OrderByDescending(d => d.TransactionDate)
                     .Take(5)
                     .ToListAsync();
@@ -73,29 +75,30 @@ namespace FinancialApp.Services.Services
             }
         }
 
-        public async Task<ServiceResult<IEnumerable<TransactionResumeModel>>> GetResumeOfActualMonthAsync()
+        public async Task<ServiceResult<TransactionResumeModel>> GetResumeOfActualMonthAsync()
         {
             try
             {
                 var date = DateTime.Now;
                 var transactions = await this.transactionRepository
-                    .Filter(t => t.TransactionDate.Year == date.Year && t.TransactionDate.Month == date.Month)
+                    .All().Include(d => d.Account)
+                    .Where(t => t.TransactionDate.Year == date.Year && t.TransactionDate.Month == date.Month)
                     .ToListAsync();
                 var positives = transactions.Where(t => t.Amount >= 0);
                 var negatives = transactions.Where(t => t.Amount < 0);
 
-                var result = transactions.Select(t => new TransactionResumeModel
+                var result =  new TransactionResumeModel
                 {
                     Income = positives.Sum(d => d.Amount * d.Account.ConversionRate),
                     Expenses = negatives.Sum(d => d.Amount * d.Account.ConversionRate),
-                    Total = positives.Sum(d => d.Amount * d.Account.ConversionRate) - negatives.Sum(d => d.Amount * d.Account.ConversionRate),
-                });
+                    Total = positives.Sum(d => d.Amount * d.Account.ConversionRate) + negatives.Sum(d => d.Amount * d.Account.ConversionRate),
+                };
 
-                return ServiceResult<IEnumerable<TransactionResumeModel>>.SuccessResult(result);
+                return ServiceResult<TransactionResumeModel>.SuccessResult(result);
             }
             catch (Exception e)
             {
-                return ServiceResult<IEnumerable<TransactionResumeModel>>.ErrorResult(e.Message);
+                return ServiceResult<TransactionResumeModel>.ErrorResult(e.Message);
             }
         }
     }

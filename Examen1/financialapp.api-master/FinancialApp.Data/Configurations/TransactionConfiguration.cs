@@ -19,7 +19,7 @@ namespace FinancialApp.Data.Configurations
                     Amount = 500,
                     AccountId = -1,
                     Description = "Salario",
-                    TransactionDate = DateTime.Today.AddDays(-5)
+                    TransactionDate = DateTime.Now.AddDays(-5)
                 },
                 new Transaction
                 {
@@ -27,7 +27,7 @@ namespace FinancialApp.Data.Configurations
                     Amount = -20,
                     AccountId = -1,
                     Description = "Comida Dennys",
-                    TransactionDate = DateTime.Today.AddDays(-1)
+                    TransactionDate = DateTime.Now.AddDays(-1)
                 },
                 new Transaction
                 {
@@ -35,7 +35,7 @@ namespace FinancialApp.Data.Configurations
                     Amount = 1500,
                     AccountId = -2,
                     Description = "Salario",
-                    TransactionDate = DateTime.Today
+                    TransactionDate = DateTime.Now
                 },
                 new Transaction
                 {
@@ -43,7 +43,7 @@ namespace FinancialApp.Data.Configurations
                     Amount = -5,
                     AccountId = -1,
                     Description = "Corte de pelo",
-                    TransactionDate = DateTime.Today.AddDays(-2)
+                    TransactionDate = DateTime.Now.AddDays(-2)
                 }
             });
         }

@@ -29,12 +29,12 @@ namespace FinancialApp.API.Controllers
                 return this.BadRequest(transactionsResume.Error);
             }
 
-            return this.Ok(transactionsResume.Result.Select(d => new TransactionResumeDTO 
+            return this.Ok(new TransactionResumeDTO 
             {
-                Income = d.Income,
-                Expenses = d.Expenses,
-                Total = d.Total,
-            }));
+                Income = transactionsResume.Result.Income,
+                Expenses = transactionsResume.Result.Expenses,
+                Total = transactionsResume.Result.Total,
+            });
         }
 
         [HttpGet("GetLastFiveTransactionsOfCurrentMonth")]
@@ -50,7 +50,7 @@ namespace FinancialApp.API.Controllers
             {
                 Account = d.Account?.Name,
                 AccountId = d.AccountId,
-                Amount = d.Amount,
+                Amount = d.Amount * d.Account.ConversionRate,
                 Description = d.Description,
                 TransactionDate = d.TransactionDate,
             }));
