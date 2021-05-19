@@ -1,0 +1,27 @@
+<div class="card">
+  <div class="card-body"> 
+    <h2 class="card-title"> 
+     {{title}}
+    </h2>
+    <div class="card-text">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <th>Descripción</th>
+            <th>Completo</th>
+            <th>Cantidad</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let todo of toDoListItems" (click)="onSelect(todo);">
+              <td>{{ todo.description | uppercase }}</td>
+              <td><input type="checkbox" [attr.checked]="todo.isCompleted ? 'checked' : null"></td>
+              <td>{{ todo.amount | currency }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<app-todo-list-item [selectedToDoItem]="selectedToDoItem"></app-todo-list-item>
