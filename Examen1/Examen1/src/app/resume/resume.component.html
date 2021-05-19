@@ -5,14 +5,14 @@
         </h2>
         <div class="card-text">
             <p [ngStyle] = "{'color' : 'green'}" class="text-center">
-                Income:  ${{resume.income}}
+                Income:  {{resume.income |  currency:'USD' }}
              </p>
             <p [ngStyle] = "{'color' : 'red'}" class="text-center">
-                Expenses:  ${{resume.expenses}}
+                Expenses:  {{resume.expenses|  currency:'USD' }}
             </p>
             <hr/>
             <p [ngStyle] = "{'color' : 'green'}" class="text-center">
-                Total:  ${{resume.total}}
+                Total:  {{resume.total|  currency:'USD' }}
             </p>
         </div>
     </div>
