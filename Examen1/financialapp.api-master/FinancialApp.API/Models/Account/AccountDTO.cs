@@ -10,5 +10,7 @@ namespace FinancialApp.API.Models.Account
         public string Name { get; set; }
 
         public double Amount { get; set; }
+
+        public string CurrencySimbol { get; set; }
     }
 }

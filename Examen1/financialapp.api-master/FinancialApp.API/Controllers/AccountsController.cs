@@ -32,6 +32,7 @@ namespace FinancialApp.API.Controllers
             {
                 Amount = d.Amount,
                 Name = d.Name,
+                CurrencySimbol = d.Currency
             }));
         }
     }
