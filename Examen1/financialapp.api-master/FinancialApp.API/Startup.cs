@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using FinancialApp.Core;
 using FinancialApp.Data;
+using FinancialApp.Data.Entities;
+using FinancialApp.Data.Repositories;
+using FinancialApp.Services.IServices;
+using FinancialApp.Services.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +40,10 @@ namespace FinancialApp.API
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddScoped<IRepository<Account>, AccountRepository>();
+            services.AddScoped<IRepository<Transaction>, TransactionRepository>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ITransactionService, TransactionService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
