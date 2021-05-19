@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FinancialApp.Core\FinancialApp.Core.csproj" />
     <ProjectReference Include="..\FinancialApp.Data\FinancialApp.Data.csproj" />
   </ItemGroup>
 

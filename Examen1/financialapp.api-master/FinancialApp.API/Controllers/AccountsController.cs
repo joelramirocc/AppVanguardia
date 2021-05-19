@@ -1,4 +1,5 @@
-﻿using FinancialApp.Services.IServices;
+﻿using FinancialApp.API.Models.Account;
+using FinancialApp.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,20 @@ namespace FinancialApp.API.Controllers
             this.accountService = accountService;
         }
 
+        [HttpGet()]
+        public async Task<IActionResult> GetAsync()
+        {
+            var accounts = await this.accountService.GetAllAccountsAsync();
+            if (accounts.ResponseCode != Core.ResponseCode.Success)
+            {
+                return this.BadRequest(accounts.Error);
+            }
+
+            return this.Ok(accounts.Result.Select(d => new AccountDTO 
+            {
+                Amount = d.Amount,
+                Name = d.Name,
+            }));
+        }
     }
 }

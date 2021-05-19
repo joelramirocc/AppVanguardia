@@ -32,7 +32,18 @@ namespace FinancialApp.Services.Services
                 {
                     return ServiceResult<bool>.ErrorResult("El id de la cuenta es inválido");
                 }
+                if (transaction.Amount == 0)
+                {
+                    return ServiceResult<bool>.ErrorResult("La cantidad no puede ser cero");
 
+                }
+                if (account.Amount < transaction.Amount)
+                {
+                    return ServiceResult<bool>.ErrorResult("El monto solicitado excede a la cantidad en la cuenta");
+                }
+
+                account.Amount += transaction.Amount;
+                this.accountRepository.Update(account);
                 this.transactionRepository.Create(transaction);
                 await this.transactionRepository.SaveChangesAsync();
                 return ServiceResult<bool>.SuccessResult(true);
@@ -70,12 +81,12 @@ namespace FinancialApp.Services.Services
                 var transactions = await this.transactionRepository
                     .Filter(t => t.TransactionDate.Year == date.Year && t.TransactionDate.Month == date.Month)
                     .ToListAsync();
-                var positives = transactions.Where(t => t.Amount >=0);
-                var negatives = transactions.Where(t => t.Amount <0);
+                var positives = transactions.Where(t => t.Amount >= 0);
+                var negatives = transactions.Where(t => t.Amount < 0);
 
                 var result = transactions.Select(t => new TransactionResumeModel
                 {
-                    Income = positives.Sum(d => d.Amount*d.Account.ConversionRate),
+                    Income = positives.Sum(d => d.Amount * d.Account.ConversionRate),
                     Expenses = negatives.Sum(d => d.Amount * d.Account.ConversionRate),
                     Total = positives.Sum(d => d.Amount * d.Account.ConversionRate) - negatives.Sum(d => d.Amount * d.Account.ConversionRate),
                 });
