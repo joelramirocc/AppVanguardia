@@ -1,0 +1,26 @@
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">
+            <p class="card-text text-center">Transacciones</p>            
+        </h2>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                
+                <thead>
+                    <th>Cuenta</th>
+                    <th>Descripcion</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let transaction of transactions">                        
+                        <td>{{transaction.account}}</td>
+                        <td>{{transaction.description}}</td>
+                        <td [ngStyle]= "{'color':(transaction.amount > 0 ? 'green': 'red')}">{{ transaction.amount }}</td>
+                        <td>{{transaction.transactionDate}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

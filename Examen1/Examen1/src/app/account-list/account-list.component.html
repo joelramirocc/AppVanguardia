@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">
+            <p class="card-text text-center">Cuentas</p>   
+        </h2>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <tbody>
+                    <tr *ngFor="let account of accounts">
+                        <td>{{account.name}}</td>
+                        <td>{{account.amount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

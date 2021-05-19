@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">            
+            <p class="card-text text-center">Resumen</p>   
+        </h2>
+        <div class="card-text">
+            <p [ngStyle] = "{'color' : 'green'}">
+               Income:  ${{resume.income}}
+            </p>
+            <p [ngStyle] = "{'color' : 'red'}">
+                Expenses:  ${{resume.expenses}}
+            </p>
+            <hr/>
+            <p [ngStyle] = "{'color' : 'green'}">
+                Total:  ${{resume.total}}
+            </p>
+        </div>
+    </div>
+</div>
